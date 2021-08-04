@@ -50,4 +50,6 @@ public class MemberDAO {
 
         return sqlsession.selectOne("m.idCheckMember",id);
     }
+
+
 }

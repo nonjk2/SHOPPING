@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().disable()//폼로그인 안씀
                 .httpBasic().disable()//기본 로그인 방법안씀 JWT사용하는 로그인 방법 사용할거임
                 .addFilter(new JwtAuthenticationFilter(authenticationManager()))
-                .addFilter(new JwtAuthorizationFilter(authenticationManager(),memberService)) //error
+                .addFilter(new JwtAuthorizationFilter(authenticationManager(),memberService))
                 .authorizeRequests()
                 .anyRequest().permitAll();
     }

@@ -1,19 +1,13 @@
 package com.third.shopping.controller;
 
-import com.third.shopping.dao.ItemDAO;
-import com.third.shopping.dao.SecondDAO;
 import com.third.shopping.model.entity.ItemEntity;
 import com.third.shopping.model.vo.ItemListPageVO;
 import com.third.shopping.model.vo.ItemVO;
-import com.third.shopping.model.vo.SecondVO;
 import com.third.shopping.model.vo.UpdateItemVO;
 import com.third.shopping.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 @CrossOrigin
@@ -43,6 +37,7 @@ public class ItemController {
     public List<ItemVO> itemPopList(){ //페이징처리하기()
         return itemService.itemPopList();
     }
+
 
 
     @GetMapping("/item/itemListPage") //치트키

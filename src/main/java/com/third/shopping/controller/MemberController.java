@@ -1,11 +1,14 @@
 package com.third.shopping.controller;
 
 import com.third.shopping.dao.MemberDAO;
+import com.third.shopping.model.entity.MemberEntity;
 import com.third.shopping.model.vo.InsertVO;
+import com.third.shopping.model.vo.MemberVO;
 import com.third.shopping.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @CrossOrigin
@@ -18,6 +21,10 @@ public class MemberController {
     @Autowired
     MemberDAO memberDao;
 
+    @GetMapping("/member/selectOneLogo")
+    public MemberVO selectoneMember(MemberEntity member, Principal principal){
+        return memberService.selectoneMember(member , principal);
+    }
 
     @PostMapping("/member/registerMember")
     public int registerMember(@RequestBody InsertVO vo){
@@ -43,5 +50,8 @@ public class MemberController {
     public List<InsertVO> list(){
         return memberDao.testList();
     }
+
+
+
 
 }

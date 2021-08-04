@@ -43,7 +43,7 @@ public class JwtToken {
     public static int getTokenFromJwtSting(String jwtToken) throws IllegalArgumentException{
         Claims claims = Jwts.parser()
                 .setSigningKey(key.getBytes())
-                .parseClaimsJwt(jwtToken)
+                .parseClaimsJws(jwtToken)
                 .getBody();
 
         Integer data = claims.get("data",Integer.class);

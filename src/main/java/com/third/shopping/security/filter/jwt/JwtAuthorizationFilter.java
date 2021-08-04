@@ -43,6 +43,9 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter{
 
         String jwtToken = request.getHeader("Authorization").replace("Bearer ", ""); //베리어값을 다른값으로 해버리면 해독에 혼란 스턴 3초
 
+
+
+
         Integer idx =
                 JwtToken.getTokenFromJwtSting(jwtToken);
 
@@ -55,12 +58,10 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter{
 
             Authentication authentication =
                     new UsernamePasswordAuthenticationToken(principalDetails, null, principalDetails.getAuthorities());
-            //
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
             SecurityContextHolder.getContext().getAuthentication();
-
             chain.doFilter(request, response);
         }
     }

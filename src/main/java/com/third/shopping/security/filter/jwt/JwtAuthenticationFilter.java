@@ -62,4 +62,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             response.getWriter().append("Authorization:").append("Bearer " + JwtToken.createToken(principalDetailis.getUserIdx()) + "");
 
     }
+
+
 }

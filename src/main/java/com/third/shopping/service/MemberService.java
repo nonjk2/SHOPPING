@@ -3,9 +3,12 @@ package com.third.shopping.service;
 import com.third.shopping.dao.MemberDAO;
 import com.third.shopping.model.entity.MemberEntity;
 import com.third.shopping.model.vo.InsertVO;
+import com.third.shopping.model.vo.MemberVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.security.Principal;
 
 @Service
 public class MemberService {
@@ -51,5 +54,15 @@ public class MemberService {
 
     public int idCheckMember(String id) {
         return memberDAO.idCheckMember(id);
+    }
+
+    public MemberVO selectoneMember(MemberEntity member, Principal principal) {
+
+        MemberEntity memberEntity = findPrincipal(principal);
+        return  memberEntity.voChange2();
+    }
+
+    public MemberEntity findPrincipal(Principal principal){
+        return memberDAO.authMember(principal.getName());
     }
 }

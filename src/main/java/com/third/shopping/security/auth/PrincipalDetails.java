@@ -8,12 +8,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 
 @Data
-public class PrincipalDetails implements UserDetails {
+public class PrincipalDetails implements UserDetails{
 
     private MemberEntity member;
 
     public PrincipalDetails(MemberEntity member) {
         this.member=member;
+    }
+    public int getIdx() {
+        return member.getMem_idx();
     }
 
     @Override

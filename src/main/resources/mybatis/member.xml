@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- MemberEntity -->
 	<select id="selectMember" resultType="MemberEntity" parameterType="int">
-		select * from item where mem_idx = #{idx}
+		select * from member where mem_idx = #{idx}
 	</select>
 	
 	<!-- 회원정보수정 -->
