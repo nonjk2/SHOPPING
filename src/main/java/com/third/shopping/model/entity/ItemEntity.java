@@ -7,7 +7,6 @@ import lombok.Setter;
 import lombok.ToString;
 import org.apache.ibatis.type.Alias;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 
