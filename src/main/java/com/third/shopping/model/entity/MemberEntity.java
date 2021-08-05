@@ -1,7 +1,6 @@
 package com.third.shopping.model.entity;
 
 import com.third.shopping.model.vo.InsertVO;
-import com.third.shopping.model.vo.JangVO;
 import com.third.shopping.model.vo.MemberVO;
 import lombok.*;
 import org.apache.ibatis.type.Alias;
@@ -47,12 +46,6 @@ public class MemberEntity {
         memberVO.setTel(this.tel);
         memberVO.setAddr_detail(this.addr_detail);
         return memberVO;
-
-    }
-    public JangVO voChange3() {
-        JangVO jangVO = new JangVO();
-        jangVO.setMem_idx(this.mem_idx);
-        return jangVO;
 
     }
 

@@ -61,8 +61,8 @@ public class MemberService {
 
         MemberEntity memberEntity = findPrincipal(principal);
         return  memberEntity.voChange2();
-
     }
+
     public MemberEntity findPrincipal(Principal principal){
         return memberDAO.authMember(principal.getName());
     }
