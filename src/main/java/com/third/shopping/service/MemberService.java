@@ -56,6 +56,7 @@ public class MemberService {
         return memberDAO.idCheckMember(id);
     }
 
+
     public MemberVO selectoneMember(MemberEntity member, Principal principal) {
 
         MemberEntity memberEntity = findPrincipal(principal);
