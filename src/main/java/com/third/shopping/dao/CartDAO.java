@@ -1,10 +1,13 @@
 package com.third.shopping.dao;
 
 import com.third.shopping.model.entity.CartEntity;
+import com.third.shopping.model.vo.CartInsert;
 import com.third.shopping.model.vo.CartVO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository("cartDao")
 public class CartDAO {
@@ -12,9 +15,9 @@ public class CartDAO {
     @Autowired
     SqlSession sqlSession;
 
-    public int cartInsertItem(CartVO cartVO1) {
+    public int cartInsertItem(CartInsert cartInsert) {
 
-        return sqlSession.insert("c.cartInsertItem", cartVO1);
+        return sqlSession.insert("c.cartInsertItem", cartInsert);
     }
 
 
@@ -53,8 +56,8 @@ public class CartDAO {
         return sqlSession.selectOne("c.selectSrc", item_idx);
     }*/
 
-    public CartEntity selectOneCart(int cart_idx) {
-        return sqlSession.selectOne("c.selectOneCart", cart_idx);
+    public List<CartEntity> selectListCart(int mem_idx) {
+        return sqlSession.selectList("c.selectListCart", mem_idx);
     }
 
     /* item 가져오기 */
@@ -62,8 +65,15 @@ public class CartDAO {
     public int CartInsertItem(CartVO jangVO1) {
         System.out.println(jangVO1.getMem_idx());
         System.out.println(jangVO1.getItemcount());
-        System.out.println(jangVO1.getItem_idx());
         return sqlSession.insert("c.cartInsertItem",jangVO1);
+    }
+
+    public List<CartVO> cartoneselect(int mem_idx) {
+        return sqlSession.selectList("c.cartoneselect",mem_idx);
+    }
+
+    public int deleteOne(int cart_idx) {
+        return sqlSession.delete("c.deleteOne",cart_idx);
     }
 }
 

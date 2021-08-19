@@ -25,6 +25,11 @@ public class ItemDAO {
 		return sqlsseion.selectOne("i.selectOne" , item_idx);
 	}
 
+	public List<ItemEntity> selectOne1(int item_idx) {
+
+		return sqlsseion.selectOne("i.selectOne" , item_idx);
+	}
+
 	public List<ItemEntity> selectList() {
 		
 		return sqlsseion.selectList("i.selectList");

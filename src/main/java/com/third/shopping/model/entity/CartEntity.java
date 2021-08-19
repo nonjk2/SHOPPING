@@ -18,12 +18,11 @@ public class CartEntity {
     private int item_idx;
     private int itemcount;
 
-    public CartVO voChange() {
+    public CartVO voChangeCart() {
 
         CartVO cartVO = new CartVO();
         cartVO.setCart_idx(cart_idx);
         cartVO.setMem_idx(mem_idx);
-        cartVO.setItem_idx(item_idx);
         cartVO.setItemcount(this.itemcount);
 
         return cartVO;

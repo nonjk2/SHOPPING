@@ -1,12 +1,13 @@
 package com.third.shopping.controller;
 
+import com.third.shopping.model.vo.CartInsert;
 import com.third.shopping.model.vo.CartVO;
-import com.third.shopping.model.vo.ItemVO;
 import com.third.shopping.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -45,16 +46,24 @@ public class CartController {
         return cartService.deleteAll(vo);
     }
 
+    @DeleteMapping("/cart/deleteOne")
+    public int deleteOne(int cart_idx){
+        return cartService.deleteOne(cart_idx);
+    }
+
     @GetMapping("/cart/cartList")
-    public CartVO selectOneCart(ItemVO itemVO, int cart_idx) {
-        System.out.println(itemVO.getPrice());
-        return cartService.selectOneCart(itemVO, cart_idx);
+    public List<CartVO> selectListCart(Principal principal) {
+        return cartService.selectListCart(principal);
+    }
+    @GetMapping("/cart/cartoneselect")
+    public List<CartVO> cartoneselect(int mem_idx){
+        return cartService.cartoneselect(mem_idx);
     }
 
     @PostMapping("/janginsert")
-    public int CartInsertItem(@RequestBody CartVO cartVO, Principal principal){
+    public int CartInsertItem(@RequestBody CartInsert cartInsert, Principal principal){
 
-        return cartService.cartInsertItem(cartVO, principal);
+        return cartService.cartInsertItem(cartInsert, principal);
     }
 
 

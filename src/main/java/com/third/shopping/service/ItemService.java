@@ -1,6 +1,5 @@
 package com.third.shopping.service;
 
-import com.third.shopping.controller.ItemController;
 import com.third.shopping.dao.ItemDAO;
 import com.third.shopping.dao.SecondDAO;
 import com.third.shopping.model.entity.ItemEntity;
@@ -31,6 +30,15 @@ public class ItemService {
         ItemEntity entity = itemDAO.selectOne(item_idx);
         ItemVO itemVO = entity.voChange();
         itemVO.setSrc(selectSrc(item_idx));
+        return itemVO;
+    }
+
+    public ItemVO selectOneSrcOne(int item_idx) {
+        ItemEntity entity = itemDAO.selectOne(item_idx);
+        ItemVO itemVO = entity.voChange();
+        List<String> src = new ArrayList<>();
+        src.add(itemDAO.selectSrcOne(item_idx));
+        itemVO.setSrc(src);
         return itemVO;
     }
 

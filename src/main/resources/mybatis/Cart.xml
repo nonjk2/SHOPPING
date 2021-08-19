@@ -14,7 +14,7 @@
                  #{item_idx},
                  '0'                  )
     </insert>
-    <insert id="cartInsertItem" parameterType="CartVO" >
+    <insert id="cartInsertItem" parameterType="CartInsert" >
         insert into CART values(
         seq_CART.nextVal,
         #{mem_idx},
@@ -23,9 +23,14 @@
         )
     </insert>
     <!-- select -->
-    <select id="selectOneCart" resultType="CartEntity" parameterType="int">
-        select * from cart where cart_idx = #{cart_idx}
+    <select id="selectListCart" resultType="CartEntity" parameterType="int">
+        select * from cart where mem_idx = #{mem_idx}
     </select>
+    <select id="cartoneselect" resultType="CartVO" parameterType="int">
+        select * from cart where mem_idx = #{mem_idx}
+    </select>
+
+
 
     <!--update-->
     <update id="upCount" parameterType="CartVO">
@@ -49,6 +54,11 @@
     <delete id="deleteAll" parameterType="CartVO">
         delete from cart
         where mem_idx = #{mem_idx}
+    </delete>
+
+    <delete id="deleteOne" parameterType="int">
+        delete from cart
+        where cart_idx = #{cart_idx}
     </delete>
 
 

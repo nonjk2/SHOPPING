@@ -1,14 +1,18 @@
 package com.third.shopping.service;
 
 import com.third.shopping.dao.CartDAO;
+import com.third.shopping.dao.ItemDAO;
 import com.third.shopping.model.entity.CartEntity;
 import com.third.shopping.model.entity.MemberEntity;
+import com.third.shopping.model.vo.CartInsert;
 import com.third.shopping.model.vo.CartVO;
 import com.third.shopping.model.vo.ItemVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class CartService {
@@ -17,6 +21,10 @@ public class CartService {
     MemberService memberService;
     @Autowired
     CartDAO cartDAO;
+    @Autowired
+    ItemDAO itemDAO;
+    @Autowired
+    ItemService itemService;
 
 
     public int insertCart(CartVO vo, Principal principal) {
@@ -68,20 +76,36 @@ public class CartService {
         return itemDAO.selectPrice(item_idx);
     }*/
 
-    public CartVO selectOneCart(ItemVO itemVO, int cart_idx) {
-        CartEntity entity = cartDAO.selectOneCart(cart_idx);
-        CartVO vo = entity.voChange();
-        vo.setName(itemVO.getName());
-        vo.setPrice(itemVO.getPrice());
-        vo.setSrc(itemVO.getSrc());
-        return vo;
+    public List<CartVO> selectListCart(Principal principal) {
+        MemberEntity memberEntity = memberService.findPrincipal(principal);
+
+        List<CartEntity> cartEntityList = cartDAO.selectListCart(memberEntity.getMem_idx());
+        System.out.println(memberEntity.getMem_idx());
+        List<CartVO> cartVOList = new ArrayList<>();
+        for (int i=0 ; i<cartEntityList.size();i++){
+
+            cartVOList.add(cartEntityList.get(i).voChangeCart());
+            ItemVO item = itemService.selectOneSrcOne(cartEntityList.get(i).getItem_idx());
+
+            cartVOList.get(i).setItemVO(item);
+        }
+
+        return cartVOList;
+
     }
 
-    public int cartInsertItem(CartVO cartVO, Principal principal) {
+    public int cartInsertItem(CartInsert CartInsert, Principal principal) {
 
         MemberEntity memberEntity = memberService.findPrincipal(principal);
-        cartVO.setMem_idx(memberEntity.getMem_idx());
-        return cartDAO.cartInsertItem(cartVO);
+        CartInsert.setMem_idx(memberEntity.getMem_idx());
+        return cartDAO.cartInsertItem(CartInsert);
     }
 
+    public List<CartVO> cartoneselect(int mem_idx) {
+        return cartDAO.cartoneselect(mem_idx);
+    }
+
+    public int deleteOne(int cart_idx) {
+        return cartDAO.deleteOne(cart_idx);
+    }
 }
